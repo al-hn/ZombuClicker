@@ -19,40 +19,28 @@ public class Zombie : MonoBehaviour
     public GameObject ZombiePrefab;
     public TextMeshProUGUI CoinsObject;
     [SerializeField] public int health = 100;
-
     [SerializeField] public float zombieAttackCooldown = 3.0f;
     [SerializeField] public float RespawnCooldown = 1.0f;
     [SerializeField] public int damage = 1;
-    [SerializeField] public float CoinsBalance = 0;
+    [SerializeField] public int CoinsBalance = 0;
     [SerializeField] public int HPRegenBase = 3;
-    
-
     [SerializeField] private GameObject Zombu;
 
     void Start()
     {
         InvokeRepeating("AttackBase" , zombieAttackCooldown ,zombieAttackCooldown );
         baseHPValue = GameObject.Find("Base HP Text").GetComponent<BaseHPValue>();
-        
-        
-        
     }
 
     public void AttackBase()
     {   
-        if(baseHPValue.BaseHealth >=0 ){
+        if(baseHPValue.BaseHealth >=0)
+        {
             baseHPValue.BaseHealth = baseHPValue.BaseHealth - damage;
-
         }
         else{
             Debug.Log("Ты сдох");
         }
-        // baseHPValue.BaseHealth = baseHPValue.BaseHealth - damage; 
-        // Debug.Log("Мы атакавали");
-        // if(baseHPValue.BaseHealth <= 0){
-        //     Debug.Log("База разрушена");
-        // }
-
     }
 
     public void Die()
@@ -62,30 +50,29 @@ public class Zombie : MonoBehaviour
         Debug.Log("Zombie Is Killed");
         DropCoin();
         HpHealAfterKillZombie();
-        
-        
-    
-    }
-    public void Spawn(){
-         
-         gameObject.SetActive(true);
-         health = 100;
-         isAlive = true;
-         
-         
     }
 
-    private void DropCoin(){
+    public void Spawn()
+    {
+        gameObject.SetActive(true);
+        health = 100;
+        isAlive = true;
+    }
+
+    private void DropCoin()
+    {
         int CountCoins = UnityEngine.Random.Range(1, 5);
         CoinsBalance = CoinsBalance + CountCoins;
-        }
+    }
     
-   void Update(){
-    CoinsObject.text = $"{CoinsBalance}";
-   }
-  private void HpHealAfterKillZombie(){
-    int HealHPBase = UnityEngine.Random.Range(1, HPRegenBase);
-    baseHPValue.BaseHealth = baseHPValue.BaseHealth + HealHPBase;
-  }
-  
+    void Update()
+    {
+        CoinsObject.text = $"{CoinsBalance}";
+    }
+
+    private void HpHealAfterKillZombie()
+    {
+        int HealHPBase = UnityEngine.Random.Range(1, HPRegenBase);
+        baseHPValue.BaseHealth = baseHPValue.BaseHealth + HealHPBase;
+    }
 }

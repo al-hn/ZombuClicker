@@ -10,7 +10,6 @@ public class BaseShield : Item
     public void Start()
     {
         baseHPValue = GameObject.Find("Base HP Text").GetComponent<BaseHPValue>();
-        Apply();
     }
 
     public override void Apply()
