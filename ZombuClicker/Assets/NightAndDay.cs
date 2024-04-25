@@ -13,13 +13,13 @@ public class NightAndDay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Night;
     [SerializeField] private TextMeshProUGUI Day;
     [SerializeField] private TextMeshProUGUI judgment_night;
-    [SerializeField] private float ColdownDays = 0.3f;
+    [SerializeField] private float ColdownDays = 60f;
     
     [SerializeField] private float ChangeJudgment_night = 1;
     
 
    public void Start(){
-        InvokeRepeating("DayAndNight" , 60.0f , ColdownDays );
+        InvokeRepeating("DayAndNight" , 60f , ColdownDays );
     }
     private void DayAndNight(){
         if(Day.gameObject.active){
