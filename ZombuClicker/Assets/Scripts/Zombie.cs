@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using System.Threading.Tasks;
+using RandomUnity = UnityEngine.Random;
+using RandomSystem = System.Random;
+using TMPro;
 
 
 
@@ -14,11 +17,16 @@ public class Zombie : MonoBehaviour
     public bool isAlive = true;
     public BaseHPValue baseHPValue;
     public GameObject ZombiePrefab;
+    public TextMeshProUGUI CoinsObject;
     [SerializeField] public int health = 100;
+
     [SerializeField] public float zombieAttackCooldown = 3.0f;
     [SerializeField] public float RespawnCooldown = 1.0f;
     [SerializeField] public int damage = 1;
-    [SerializeField] public GameObject DropCoins;
+    [SerializeField] public float CoinsBalance = 0;
+    [SerializeField] public int HPRegenBase = 3;
+    
+
     [SerializeField] private GameObject Zombu;
 
     void Start()
@@ -52,7 +60,8 @@ public class Zombie : MonoBehaviour
         isAlive = false;
         gameObject.SetActive(false);
         Debug.Log("Zombie Is Killed");
-        
+        DropCoin();
+        HpHealAfterKillZombie();
         
         
     
@@ -67,7 +76,16 @@ public class Zombie : MonoBehaviour
     }
 
     private void DropCoin(){
-         
-    }
+        int CountCoins = UnityEngine.Random.Range(1, 5);
+        CoinsBalance = CoinsBalance + CountCoins;
+        }
+    
+   void Update(){
+    CoinsObject.text = $"{CoinsBalance}";
+   }
+  private void HpHealAfterKillZombie(){
+    int HealHPBase = UnityEngine.Random.Range(1, HPRegenBase);
+    baseHPValue.BaseHealth = baseHPValue.BaseHealth + HealHPBase;
+  }
   
 }
