@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 public class Weapon : MonoBehaviour
 {
     Zombie zombie;
-    public float respawnDelay = 1.0f;
     [SerializeField] public int damage = 5;
 
     void Start()
@@ -22,9 +21,8 @@ public class Weapon : MonoBehaviour
         if (zombie.health <= 0)
         {
             zombie.Die();
-            await Task.Delay((int)(respawnDelay * 1000));
+            await Task.Delay((int)(zombie.RespawnCooldown * 1000));
             zombie.Spawn();
         }
     }
-
 }
