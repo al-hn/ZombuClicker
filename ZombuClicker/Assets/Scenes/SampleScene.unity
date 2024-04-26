@@ -1418,7 +1418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOwned: 0
-  price: 100
+  price: 1
   baseHPValue: {fileID: 1303701320}
 --- !u!4 &499283982
 Transform:
@@ -2637,12 +2637,12 @@ MonoBehaviour:
   zombie: {fileID: 1362199860}
   addDamageFromFirstItems: 1
   RegenBase: 1
-  baseShield: {fileID: 0}
+  baseShield: {fileID: 499283981}
   youDontHaveObj: {fileID: 1712167114}
-  heal: {fileID: 0}
-  fireAspect: {fileID: 0}
-  autoclicker: {fileID: 0}
-  dmgDoubler: {fileID: 0}
+  heal: {fileID: 1176532025}
+  fireAspect: {fileID: 1145803552}
+  autoclicker: {fileID: 1808839741}
+  dmgDoubler: {fileID: 1172761987}
 --- !u!1 &710346672
 GameObject:
   m_ObjectHideFlags: 0
@@ -3802,7 +3802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812b4d3f3e1026c4885eef8358414127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnDelay: 1
   damage: 5
 --- !u!4 &1014498494
 Transform:
@@ -4171,7 +4170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOwned: 0
-  price: 25
+  price: 1
   weapon: {fileID: 1014498493}
 --- !u!4 &1145803553
 Transform:
@@ -4218,7 +4217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOwned: 0
-  price: 50
+  price: 1
   weapon: {fileID: 1014498493}
 --- !u!4 &1172761988
 Transform:
@@ -4265,7 +4264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOwned: 0
-  price: 30
+  price: 1
   baseHPValue: {fileID: 1303701320}
 --- !u!4 &1176532026
 Transform:
@@ -4719,7 +4718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95f308f90937e24abf7c7f3c9ba35e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombie: {fileID: 1362199860}
   BaseHealth: 100
   BSValue: {fileID: 1401475383}
 --- !u!224 &1362199859 stripped
@@ -6985,7 +6983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOwned: 0
-  price: 250
+  price: 1
   zombie: {fileID: 1362199860}
 --- !u!4 &1808839742
 Transform:
@@ -8135,6 +8133,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 625042358}
     - target: {fileID: 2261607106456476188, guid: ac65c0243ac84be44b41c14b54c21c56, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261607106456476188, guid: ac65c0243ac84be44b41c14b54c21c56, type: 3}
       propertyPath: DropCoins
       value: 
       objectReference: {fileID: 911312260}
@@ -8161,6 +8163,10 @@ PrefabInstance:
     - target: {fileID: 8904995120889482092, guid: ac65c0243ac84be44b41c14b54c21c56, type: 3}
       propertyPath: m_Name
       value: Zombu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904995120889482092, guid: ac65c0243ac84be44b41c14b54c21c56, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

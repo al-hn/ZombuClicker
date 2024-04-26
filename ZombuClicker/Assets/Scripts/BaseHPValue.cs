@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BaseHPValue : MonoBehaviour
 {
-    public Zombie zombie;
+
     [SerializeField] public int BaseHealth = 100;
     public TextMeshProUGUI BSValue;
 
@@ -13,7 +13,6 @@ public class BaseHPValue : MonoBehaviour
     void Start()
     {
         BSValue = GameObject.Find("Value base HP").GetComponent<TextMeshProUGUI>();
-        zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
     }
 
     // Update is called once per frame
