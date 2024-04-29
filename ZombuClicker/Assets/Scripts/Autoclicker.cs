@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,15 +12,11 @@ public class Autoclicker : Item
     public void Start()
     {
         zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
-        Apply();
     }
 
     public override void Apply()
     {
-        if(isOwned == true)
-        {
-            InvokeRepeating("autoclick", 1.0f, 1.0f);
-        }
+        InvokeRepeating("autoclick", 1.0f, 1.0f);
     }
 
     public async void autoclick()

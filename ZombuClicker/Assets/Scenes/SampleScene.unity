@@ -1106,6 +1106,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351656162}
   m_CullTransparentMesh: 1
+--- !u!1 &369478995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 369478997}
+  - component: {fileID: 369478996}
+  m_Layer: 0
+  m_Name: Vampirism
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &369478996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369478995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa2fd45dc0d9dd4ab8173d7ad43d99b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOwned: 0
+  price: 1
+  zombie: {fileID: 0}
+--- !u!4 &369478997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369478995}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 531.0961, y: 204.75139, z: -5.695153}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &451647211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2635,14 +2682,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 1014498493}
   zombie: {fileID: 1362199860}
-  addDamageFromFirstItems: 1
-  RegenBase: 1
   baseShield: {fileID: 499283981}
   youDontHaveObj: {fileID: 1712167114}
   heal: {fileID: 1176532025}
   fireAspect: {fileID: 1145803552}
   autoclicker: {fileID: 1808839741}
   dmgDoubler: {fileID: 1172761987}
+  dmgAdder: {fileID: 1916490071}
+  vamp: {fileID: 369478996}
 --- !u!1 &710346672
 GameObject:
   m_ObjectHideFlags: 0
@@ -7185,6 +7232,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882747957}
   m_CullTransparentMesh: 1
+--- !u!1 &1916490070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916490072}
+  - component: {fileID: 1916490071}
+  m_Layer: 0
+  m_Name: DamageAdder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1916490071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916490070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3bcd5a2a6ef6341801076c91dc6998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOwned: 0
+  price: 1
+  weapon: {fileID: 1014498493}
+  quantity: 0
+--- !u!4 &1916490072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916490070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 484.0905, y: 274.3888, z: -6.096737}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1945567672
 GameObject:
   m_ObjectHideFlags: 0
@@ -8187,3 +8282,5 @@ SceneRoots:
   - {fileID: 1145803553}
   - {fileID: 1808839742}
   - {fileID: 1172761988}
+  - {fileID: 1916490072}
+  - {fileID: 369478997}

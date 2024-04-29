@@ -15,14 +15,14 @@ public class Shop : MonoBehaviour
 {
     public Weapon weapon;
     public Zombie zombie;
-    [SerializeField] public int addDamageFromFirstItems = 1;
-    [SerializeField] public int RegenBase = 1;
     public BaseShield baseShield;
     public GameObject youDontHaveObj;
     public Heal heal;
     public FireAspect fireAspect;
     public Autoclicker autoclicker;
     public DamageDoubler dmgDoubler;
+    public DamageAdder dmgAdder;
+    public Vampirism vamp;
     
     void Start()
     {
@@ -33,21 +33,55 @@ public class Shop : MonoBehaviour
         fireAspect = GameObject.Find("FireAspect").GetComponent<FireAspect>();
         autoclicker = GameObject.Find("Autoclicker").GetComponent<Autoclicker>();
         dmgDoubler = GameObject.Find("DamageDoubler").GetComponent<DamageDoubler>();
+        dmgAdder = GameObject.Find("DamageAdder").GetComponent<DamageAdder>();
+        vamp = GameObject.Find("Vampirism").GetComponent<Vampirism>();
     }
 
-    public void DamageFromZombieplusone(){
-        weapon.damage = weapon.damage + addDamageFromFirstItems;
+    public void DamageFromZombieplusone()
+    {
+        if (zombie.CoinsBalance >= dmgAdder.price)
+        {
+            if (dmgAdder.quantity < 5)
+            {
+                dmgAdder.quantity = dmgAdder.quantity + 1;
+                Debug.Log($"dmgadder quantity: {dmgAdder.quantity}.");
+                dmgAdder.Apply();
+            }
+            else
+            {
+                Debug.Log("You maxed out this item!");
+            }
+        }
+        else
+        {
+            youDontHaveObj.SetActive(true);
+        }
+
     }
 
     public void HPRegenBaseVoidd()
     {
-        zombie.HPRegenBase = zombie.HPRegenBase + RegenBase;
+        if (vamp.isOwned == true)
+        {
+            Debug.Log("item is already owned.");
+        }
+        else
+        {
+            if (zombie.CoinsBalance >= vamp.price)
+            {
+                zombie.CoinsBalance = zombie.CoinsBalance - vamp.price;
+                vamp.isOwned = true;
+                vamp.Apply();
+            }
+            else
+            {
+                youDontHaveObj.SetActive(true);
+            }
+        }
     }
 
     public void BuyShield()
     {
-        baseShield.price = 150;
-
         if (zombie.CoinsBalance >= baseShield.price)
         {
             zombie.CoinsBalance = zombie.CoinsBalance - baseShield.price;
@@ -90,29 +124,43 @@ public class Shop : MonoBehaviour
 
     public void BuyAutoclicker()
     {
-        if (zombie.CoinsBalance >= autoclicker.price)
+        if (autoclicker.isOwned == true)
         {
-            zombie.CoinsBalance = zombie.CoinsBalance - autoclicker.price;
-            autoclicker.isOwned = true;
-            autoclicker.Apply();
+            Debug.Log("item is already owned.");
         }
         else
         {
-            youDontHaveObj.SetActive(true);
+            if (zombie.CoinsBalance >= autoclicker.price)
+            {
+                zombie.CoinsBalance = zombie.CoinsBalance - autoclicker.price;
+                autoclicker.isOwned = true;
+                autoclicker.Apply();
+            }
+            else
+            {
+                youDontHaveObj.SetActive(true);
+            }
         }
     }
 
     public void BuyDmgDoubler()
     {
-        if (zombie.CoinsBalance >= dmgDoubler.price)
+        if (dmgDoubler.isOwned == true)
         {
-            zombie.CoinsBalance = zombie.CoinsBalance - dmgDoubler.price;
-            dmgDoubler.isOwned = true;
-            dmgDoubler.Apply();
+            Debug.Log("item is already owned.");
         }
         else
         {
-            youDontHaveObj.SetActive(true);
+            if (zombie.CoinsBalance >= dmgDoubler.price)
+            {
+                zombie.CoinsBalance = zombie.CoinsBalance - dmgDoubler.price;
+                dmgDoubler.isOwned = true;
+                dmgDoubler.Apply();
+            }
+            else
+            {
+                youDontHaveObj.SetActive(true);
+            }
         }
     }
 

@@ -18,6 +18,7 @@ public class BaseHPValue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        BaseHealth = Mathf.Clamp(BaseHealth, 0, 100);
         BSValue.text = $"{BaseHealth}"; 
     }
    

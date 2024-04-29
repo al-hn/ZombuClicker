@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDoubler : Item
+public class DamageAdder : Item
 {
     public Weapon weapon;
+    public int quantity = 0;
 
     public void Start()
     {
@@ -13,6 +14,6 @@ public class DamageDoubler : Item
 
     public override void Apply()
     {
-        weapon.damage = weapon.damage * 2;
+        weapon.damage = weapon.damage + 5;
     }
 }

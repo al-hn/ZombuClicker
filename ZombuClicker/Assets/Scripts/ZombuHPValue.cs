@@ -17,6 +17,7 @@ public class ZombuHPValue : MonoBehaviour
 
     void Update()
     {
+      zombie.health = Mathf.Clamp(zombie.health, 0, 5000);
       hpValueText.text = $"{zombie.health}";  
     }
 }
