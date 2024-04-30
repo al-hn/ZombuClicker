@@ -9,6 +9,8 @@ public class PauseGames : MonoBehaviour
     [SerializeField ] GameObject Zombu;
     [SerializeField ] GameObject ZombuText;
    
+   void Start(){
+   }
    private void Update()
  {
      HandlePause();
@@ -21,9 +23,7 @@ public class PauseGames : MonoBehaviour
      }
  }
     public void PauseGame(){
-        PausePanel.SetActive(true);
-        PausePanel.SetActive(false);
-        PausePanel.SetActive(false);
+        PausePanel.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
     public void Pause(){
@@ -33,13 +33,16 @@ public class PauseGames : MonoBehaviour
         Time.timeScale = 1;
     }
     public void ContinueGame(){
-        PausePanel.SetActive(false);
-        Zombu.SetActive(true);
-        ZombuText.SetActive(true);
+        PausePanel.gameObject.SetActive(false);
+        Zombu.gameObject.SetActive(true);
+        ZombuText.gameObject.SetActive(true);
         Time.timeScale = 1;
     }
    public void BackToMenu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+    public void Play(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
