@@ -14080,6 +14080,14 @@ PrefabInstance:
       propertyPath: CoinsBalance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2261607106456476188, guid: ac65c0243ac84be44b41c14b54c21c56, type: 3}
+      propertyPath: DamageOverlay
+      value: 
+      objectReference: {fileID: 733612424}
+    - target: {fileID: 2261607106456476188, guid: ac65c0243ac84be44b41c14b54c21c56, type: 3}
+      propertyPath: damageDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8504324101260091152, guid: ac65c0243ac84be44b41c14b54c21c56, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

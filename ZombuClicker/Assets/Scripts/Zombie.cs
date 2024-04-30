@@ -13,7 +13,9 @@ public class Zombie : MonoBehaviour
 {
     public bool isAlive = true;
     public BaseHPValue baseHPValue;
+    public float damageDuration = 0.2f;
     public TextMeshProUGUI CoinsObject;
+    public GameObject DamageOverlay;
     [SerializeField] public int health = 100;
     [SerializeField] public int armor = 0;
     [SerializeField] public float zombieAttackCooldown = 3.0f;
@@ -28,6 +30,7 @@ public class Zombie : MonoBehaviour
         baseHPValue = GameObject.Find("Base HP Text").GetComponent<BaseHPValue>();
 
         AttackBase();
+        
     }
 
     public void AttackBase()
@@ -37,6 +40,7 @@ public class Zombie : MonoBehaviour
             if(baseHPValue.BaseHealth >= 0)
             {
                 baseHPValue.BaseHealth = baseHPValue.BaseHealth - damage;
+                DamageEffect();
             }
             else
             {
@@ -147,4 +151,18 @@ public class Zombie : MonoBehaviour
         }
 
     }
+    public void DamageEffect(){
+         ShowDamageIndicator();
+        CancelInvoke("HideDamageIndicator"); //<--Resets timer if hit before indicator is hidden.
+        Invoke("HideDamageIndicator", damageDuration);
+    }
+    public void ShowDamageIndicator()
+{
+    DamageOverlay.SetActive(true);
+}
+ 
+public void HideDamageIndicator()
+{
+    DamageOverlay.SetActive(false);
+}
 }
