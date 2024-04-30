@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BaseHPValue : MonoBehaviour
 {
-
     [SerializeField] public int BaseHealth = 100;
     public TextMeshProUGUI BSValue;
 

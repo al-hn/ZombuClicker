@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;  
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -12,19 +12,24 @@ public class ScriptsMusic : MonoBehaviour
     [SerializeField] private TextMeshProUGUI on;
     [SerializeField] private TextMeshProUGUI off;
 
-    public void SetVoLume() {
+    public void SetVoLume()
+    {
         audioSource.volume = slider.value;
     }
 
-    public void ToggleText(){
-        if (off.gameObject.active) {
+    public void ToggleText()
+    {
+        if (off.gameObject.active)
+        {
             off.gameObject.SetActive(false);
             on.gameObject.SetActive(true);
             audioSource.mute = true;
-        } else {
+        }
+        else
+        {
             off.gameObject.SetActive(true);
             on.gameObject.SetActive(false);
             audioSource.mute = false;
         }
     }
-} 
+}

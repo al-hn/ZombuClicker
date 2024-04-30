@@ -21,20 +21,22 @@ public class Zombie : MonoBehaviour
     [SerializeField] public int damage = 1;
     [SerializeField] public int CoinsBalance = 0;
     [SerializeField] public int HPRegenBase = 3;
+    public NightAndDay nad;
 
     void Start()
     {
-        InvokeRepeating("AttackBase" , zombieAttackCooldown, zombieAttackCooldown);
+        InvokeRepeating("AttackBase", zombieAttackCooldown, zombieAttackCooldown);
         baseHPValue = GameObject.Find("Base HP Text").GetComponent<BaseHPValue>();
+        nad = GameObject.Find("Time").GetComponent<NightAndDay>();
 
         AttackBase();
     }
 
     public void AttackBase()
     {
-        if(isAlive)
+        if (isAlive)
         {
-            if(baseHPValue.BaseHealth >= 0)
+            if (baseHPValue.BaseHealth >= 0)
             {
                 baseHPValue.BaseHealth = baseHPValue.BaseHealth - damage;
             }
@@ -60,9 +62,18 @@ public class Zombie : MonoBehaviour
 
     public void Spawn()
     {
-        gameObject.SetActive(true);
-        RollZombie();
-        isAlive = true;
+        if (nad.Day.gameObject.active)
+        {
+            gameObject.SetActive(true);
+            DefaultZombie();
+            isAlive = true;
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            RollZombie();
+            isAlive = true;
+        }
     }
 
     public void DropCoin()
@@ -70,7 +81,7 @@ public class Zombie : MonoBehaviour
         int CountCoins = Random.Range(1, 5);
         CoinsBalance = CoinsBalance + CountCoins;
     }
-    
+
     void Update()
     {
         CoinsObject.text = $"{CoinsBalance}";
@@ -117,25 +128,25 @@ public class Zombie : MonoBehaviour
 
     public void RollZombie()
     {
-        float[] weights = {0.4f, 0.3f, 0.2f, 0.1f};
+        float[] weights = { 0.4f, 0.3f, 0.2f, 0.1f };
         float totalWeight = 0f;
-        foreach(float weight in weights)
+        foreach (float weight in weights)
         {
             totalWeight = totalWeight + weight;
         }
 
         float randVal = Random.Range(0f, totalWeight);
-        if(randVal < weights[0])
+        if (randVal < weights[0])
         {
             DefaultZombie();
             Debug.Log("Default.");
         }
-        else if(randVal < weights[0] + weights[1])
+        else if (randVal < weights[0] + weights[1])
         {
             ZombieWithArmor();
             Debug.Log("Zombie w/armor is spawned");
         }
-        else if(randVal < weights[0] + weights[1] + weights[2])
+        else if (randVal < weights[0] + weights[1] + weights[2])
         {
             SpeedZombie();
             Debug.Log("Speed zombie is spawned");

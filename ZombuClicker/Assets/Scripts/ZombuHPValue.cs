@@ -6,18 +6,18 @@ using TMPro;
 
 public class ZombuHPValue : MonoBehaviour
 {
-    public TextMeshProUGUI hpValueText;
-    public Zombie zombie;
+  public TextMeshProUGUI hpValueText;
+  public Zombie zombie;
 
-    void Start()
-    {
-      hpValueText = GameObject.Find("Zombu HP value").GetComponent<TextMeshProUGUI>();
-      zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
-    }
+  void Start()
+  {
+    hpValueText = GameObject.Find("Zombu HP value").GetComponent<TextMeshProUGUI>();
+    zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
+  }
 
-    void Update()
-    {
-      zombie.health = Mathf.Clamp(zombie.health, 0, 5000);
-      hpValueText.text = $"{zombie.health}";  
-    }
+  void Update()
+  {
+    zombie.health = Mathf.Clamp(zombie.health, 0, 5000);
+    hpValueText.text = $"{zombie.health}";
+  }
 }
