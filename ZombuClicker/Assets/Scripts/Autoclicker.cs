@@ -8,6 +8,8 @@ using UnityEngine;
 public class Autoclicker : Item
 {
     public Zombie zombie;
+    public int quantity;
+    public int damage = 1;
 
     public void Start()
     {
@@ -19,13 +21,12 @@ public class Autoclicker : Item
         InvokeRepeating("autoclick", 1.0f, 1.0f);
     }
 
-    public async void autoclick()
+    public void autoclick()
     {
-        if(zombie.health > 0) zombie.health = zombie.health - 1;
+        if(zombie.health > 0) zombie.health = zombie.health - damage;
         else
         {
             zombie.Die();
-            await Task.Delay((int)(1.0f * 1000));
             zombie.Spawn();
         } 
     }

@@ -10,6 +10,7 @@ using RandomUnity = UnityEngine.Random;
 using RandomSystem = System.Random;
 using TMPro;
 using Unity.UI;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class Shop : MonoBehaviour
     public DamageDoubler dmgDoubler;
     public DamageAdder dmgAdder;
     public Vampirism vamp;
+    [SerializeField] public TextMeshProUGUI DmgAdderCost;
+    [SerializeField] public TextMeshProUGUI FirstItemBoostText;
+    [SerializeField] public TextMeshProUGUI AcCost;
+    [SerializeField] public TextMeshProUGUI AcTier;
     
     void Start()
     {
@@ -35,6 +40,10 @@ public class Shop : MonoBehaviour
         dmgDoubler = GameObject.Find("DamageDoubler").GetComponent<DamageDoubler>();
         dmgAdder = GameObject.Find("DamageAdder").GetComponent<DamageAdder>();
         vamp = GameObject.Find("Vampirism").GetComponent<Vampirism>();
+        FirstItemBoostText = GameObject.Find("Cost Text (1)").GetComponent<TextMeshProUGUI>();
+        AcCost = GameObject.Find("autoclicker_cost").GetComponent<TextMeshProUGUI>();
+        AcTier = GameObject.Find("autoclicker_tier").GetComponent<TextMeshProUGUI>();
+        DmgAdderCost = GameObject.Find("dmgadder_cost").GetComponent<TextMeshProUGUI>();
     }
 
     public void DamageFromZombieplusone()
@@ -44,6 +53,8 @@ public class Shop : MonoBehaviour
             if (dmgAdder.quantity < 5)
             {
                 dmgAdder.quantity = dmgAdder.quantity + 1;
+                
+                FirstItemBoostText.text = $"boost: {dmgAdder.quantity}.";
                 Debug.Log($"dmgadder quantity: {dmgAdder.quantity}.");
                 dmgAdder.Apply();
             }
@@ -132,9 +143,22 @@ public class Shop : MonoBehaviour
         {
             if (zombie.CoinsBalance >= autoclicker.price)
             {
-                zombie.CoinsBalance = zombie.CoinsBalance - autoclicker.price;
-                autoclicker.isOwned = true;
-                autoclicker.Apply();
+                if (autoclicker.quantity < 5)
+                {
+                    autoclicker.quantity = autoclicker.quantity + 1;
+                    autoclicker.price = autoclicker.price + 70;
+                    autoclicker.damage = autoclicker.damage + 7;
+                    AcCost.text = $"Cost: {autoclicker.price}";
+                    AcTier.text = $"Tier: {autoclicker.quantity}";
+                    
+                    FirstItemBoostText.text = $"boost: {autoclicker.quantity}.";
+                    Debug.Log($"autoclicker quantity: {autoclicker.quantity}.");
+                    autoclicker.Apply();
+                }
+                else
+                {
+                    Debug.Log("You maxed out this item!");
+                }
             }
             else
             {

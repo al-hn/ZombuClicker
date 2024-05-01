@@ -23,6 +23,7 @@ public class Zombie : MonoBehaviour
     [SerializeField] public int damage = 1;
     [SerializeField] public int CoinsBalance = 0;
     [SerializeField] public int HPRegenBase = 3;
+    public FlashEffect fleff;
     public NightAndDay nad;
 
     void Start()
@@ -30,9 +31,9 @@ public class Zombie : MonoBehaviour
         InvokeRepeating("AttackBase", zombieAttackCooldown, zombieAttackCooldown);
         baseHPValue = GameObject.Find("Base HP Text").GetComponent<BaseHPValue>();
         nad = GameObject.Find("Time").GetComponent<NightAndDay>();
-
+        fleff = GetComponent<FlashEffect>();
         AttackBase();
-        
+
     }
 
     public void AttackBase()
@@ -69,6 +70,7 @@ public class Zombie : MonoBehaviour
         if (nad.Day.gameObject.active)
         {
             gameObject.SetActive(true);
+            fleff.img.material = fleff.originalMat;
             DefaultZombie();
             isAlive = true;
         }
@@ -162,18 +164,19 @@ public class Zombie : MonoBehaviour
         }
 
     }
-    public void DamageEffect(){
-         ShowDamageIndicator();
+    public void DamageEffect()
+    {
+        ShowDamageIndicator();
         CancelInvoke("HideDamageIndicator"); //<--Resets timer if hit before indicator is hidden.
         Invoke("HideDamageIndicator", damageDuration);
     }
     public void ShowDamageIndicator()
-{
-    DamageOverlay.SetActive(true);
-}
- 
-public void HideDamageIndicator()
-{
-    DamageOverlay.SetActive(false);
-}
+    {
+        DamageOverlay.SetActive(true);
+    }
+
+    public void HideDamageIndicator()
+    {
+        DamageOverlay.SetActive(false);
+    }
 }
