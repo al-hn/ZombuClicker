@@ -15,6 +15,7 @@ public class Zombie : MonoBehaviour
     public BaseHPValue baseHPValue;
     public float damageDuration = 0.2f;
     public TextMeshProUGUI CoinsObject;
+    public GameObject DeathPanel;
     public GameObject DamageOverlay;
     [SerializeField] public int health = 100;
     [SerializeField] public int armor = 0;
@@ -40,14 +41,16 @@ public class Zombie : MonoBehaviour
     {
         if (isAlive)
         {
-            if (baseHPValue.BaseHealth >= 0)
+            if (baseHPValue.BaseHealth > 0)
             {
                 baseHPValue.BaseHealth = baseHPValue.BaseHealth - damage;
                 DamageEffect();
             }
-            else
+            else if(baseHPValue.BaseHealth == 0)
             {
-                Debug.Log("Ты сдох");
+                DeathPanel.gameObject.SetActive(true);
+                Time.timeScale = 0;
+                Debug.Log("ТЫ сдох");
             }
         }
         else

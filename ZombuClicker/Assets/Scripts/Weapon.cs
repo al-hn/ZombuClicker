@@ -2,10 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.Mathematics;
+using TMPro;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class Weapon : MonoBehaviour
 {
     Zombie zombie;
+    public GameObject popUPDamagePrefab;
+    
+    public TMP_Text popUpText;
+    public GameObject ParentpopUpText;
     [SerializeField] public int damage = 5;
     FlashEffect fleff;
 
@@ -13,11 +21,14 @@ public class Weapon : MonoBehaviour
     {
         zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
         fleff = GameObject.Find("Zombu").GetComponent<FlashEffect>();
+        popUpText.text = damage.ToString();
     }
 
     public async void Attack()
     {
         zombie.health = zombie.health - damage;
+        Instantiate(popUPDamagePrefab, transform.position , quaternion.identity );
+       
         Debug.Log("ZOMBU HEALTH: " + zombie.health);
         fleff.Flash();
 
@@ -28,4 +39,6 @@ public class Weapon : MonoBehaviour
             zombie.Spawn();
         }
     }
+    
+
 }
