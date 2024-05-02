@@ -28,7 +28,7 @@ public class Shop : MonoBehaviour
     [SerializeField] public TextMeshProUGUI FirstItemBoostText;
     [SerializeField] public TextMeshProUGUI AcCost;
     [SerializeField] public TextMeshProUGUI AcTier;
-    
+
     void Start()
     {
         zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
@@ -53,9 +53,10 @@ public class Shop : MonoBehaviour
             if (dmgAdder.quantity < 5)
             {
                 dmgAdder.quantity = dmgAdder.quantity + 1;
-                
-                FirstItemBoostText.text = $"boost: {dmgAdder.quantity}.";
-                Debug.Log($"dmgadder quantity: {dmgAdder.quantity}.");
+                dmgAdder.price = dmgAdder.price + 25;
+
+                DmgAdderCost.text = $"Cost: {dmgAdder.price}";
+                FirstItemBoostText.text = $"Tier: {dmgAdder.quantity}.";
                 dmgAdder.Apply();
             }
             else
@@ -150,7 +151,7 @@ public class Shop : MonoBehaviour
                     autoclicker.damage = autoclicker.damage + 7;
                     AcCost.text = $"Cost: {autoclicker.price}";
                     AcTier.text = $"Tier: {autoclicker.quantity}";
-                    
+
                     FirstItemBoostText.text = $"boost: {autoclicker.quantity}.";
                     Debug.Log($"autoclicker quantity: {autoclicker.quantity}.");
                     autoclicker.Apply();

@@ -29,7 +29,7 @@ public class FlashEffect : MonoBehaviour
 
     public void Flash()
     {
-        if(flashRoutine != null)
+        if (flashRoutine != null)
         {
             StopCoroutine(flashRoutine);
         }

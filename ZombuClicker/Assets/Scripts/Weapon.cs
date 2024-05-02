@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
 {
     Zombie zombie;
     public GameObject popUPDamagePrefab;
-    
+
     public TMP_Text popUpText;
     public GameObject ParentpopUpText;
     [SerializeField] public int damage = 5;
@@ -27,8 +27,8 @@ public class Weapon : MonoBehaviour
     public async void Attack()
     {
         zombie.health = zombie.health - damage;
-        Instantiate(popUPDamagePrefab, transform.position , quaternion.identity );
-       
+        Instantiate(popUPDamagePrefab, transform.position, quaternion.identity);
+
         Debug.Log("ZOMBU HEALTH: " + zombie.health);
         fleff.Flash();
 
@@ -39,6 +39,5 @@ public class Weapon : MonoBehaviour
             zombie.Spawn();
         }
     }
-    
 
 }

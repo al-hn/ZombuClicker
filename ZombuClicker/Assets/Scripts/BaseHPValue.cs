@@ -6,19 +6,23 @@ using UnityEngine;
 public class BaseHPValue : MonoBehaviour
 {
     [SerializeField] public int BaseHealth = 100;
+    [SerializeField] public int Armor = 0;
     public TextMeshProUGUI BSValue;
+    public TextMeshProUGUI ShieldText;
 
-    // Start is called before the first frame update
     void Start()
     {
         BSValue = GameObject.Find("Value base HP").GetComponent<TextMeshProUGUI>();
+        ShieldText = GameObject.Find("armortext").GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        Armor = Mathf.Clamp(Armor, 0, 100);
         BaseHealth = Mathf.Clamp(BaseHealth, 0, 100);
-        BSValue.text = $"{BaseHealth}"; 
+
+        ShieldText.text = $"Shield {Armor}";
+        BSValue.text = $"{BaseHealth}";
     }
-   
+
 }

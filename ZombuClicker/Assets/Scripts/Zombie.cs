@@ -15,7 +15,6 @@ public class Zombie : MonoBehaviour
     public BaseHPValue baseHPValue;
     public float damageDuration = 0.2f;
     public TextMeshProUGUI CoinsObject;
-    public GameObject DeathPanel;
     public GameObject DamageOverlay;
     [SerializeField] public int health = 100;
     [SerializeField] public int armor = 0;
@@ -26,6 +25,7 @@ public class Zombie : MonoBehaviour
     [SerializeField] public int HPRegenBase = 3;
     public FlashEffect fleff;
     public NightAndDay nad;
+    public GameObject deathscreen;
 
     void Start()
     {
@@ -34,29 +34,35 @@ public class Zombie : MonoBehaviour
         nad = GameObject.Find("Time").GetComponent<NightAndDay>();
         fleff = GetComponent<FlashEffect>();
         AttackBase();
-
     }
 
     public void AttackBase()
     {
         if (isAlive)
         {
-            if (baseHPValue.BaseHealth > 0)
+            if (baseHPValue.Armor > 0)
             {
-                baseHPValue.BaseHealth = baseHPValue.BaseHealth - damage;
+                baseHPValue.Armor = baseHPValue.Armor - damage;
                 DamageEffect();
             }
-            else if(baseHPValue.BaseHealth == 0)
+            else if (baseHPValue.Armor == 0)
             {
-                DeathPanel.gameObject.SetActive(true);
-                Time.timeScale = 0;
-                Debug.Log("ТЫ сдох");
+                if (baseHPValue.BaseHealth > 0)
+                {
+                    baseHPValue.BaseHealth = baseHPValue.BaseHealth - damage;
+                    DamageEffect();
+                }
+                else if (baseHPValue.Armor == 0 && baseHPValue.BaseHealth == 0)
+                {
+                    deathscreen.gameObject.SetActive(true);
+                }
             }
         }
         else
         {
-            Debug.Log("Dead");
+            Debug.Log("Zombie is dead");
         }
+
     }
 
     public void Die()
@@ -173,6 +179,7 @@ public class Zombie : MonoBehaviour
         CancelInvoke("HideDamageIndicator"); //<--Resets timer if hit before indicator is hidden.
         Invoke("HideDamageIndicator", damageDuration);
     }
+
     public void ShowDamageIndicator()
     {
         DamageOverlay.SetActive(true);

@@ -14,6 +14,6 @@ public class BaseShield : Item
 
     public override void Apply()
     {
-        if (isOwned == true) baseHPValue.BaseHealth = baseHPValue.BaseHealth * 2;
+        if (isOwned == true) baseHPValue.Armor = baseHPValue.Armor + 100;
     }
 }
