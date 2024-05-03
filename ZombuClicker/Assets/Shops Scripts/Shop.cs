@@ -40,7 +40,7 @@ public class Shop : MonoBehaviour
         dmgDoubler = GameObject.Find("DamageDoubler").GetComponent<DamageDoubler>();
         dmgAdder = GameObject.Find("DamageAdder").GetComponent<DamageAdder>();
         vamp = GameObject.Find("Vampirism").GetComponent<Vampirism>();
-        FirstItemBoostText = GameObject.Find("Cost Text (1)").GetComponent<TextMeshProUGUI>();
+        FirstItemBoostText = GameObject.Find("Tier DamageAdder").GetComponent<TextMeshProUGUI>();
         AcCost = GameObject.Find("autoclicker_cost").GetComponent<TextMeshProUGUI>();
         AcTier = GameObject.Find("autoclicker_tier").GetComponent<TextMeshProUGUI>();
         DmgAdderCost = GameObject.Find("dmgadder_cost").GetComponent<TextMeshProUGUI>();
@@ -53,6 +53,7 @@ public class Shop : MonoBehaviour
             if (dmgAdder.quantity < 5)
             {
                 dmgAdder.quantity = dmgAdder.quantity + 1;
+                zombie.CoinsBalance = zombie.CoinsBalance - dmgAdder.price;
                 dmgAdder.price = dmgAdder.price + 25;
 
                 DmgAdderCost.text = $"Cost: {dmgAdder.price}";
@@ -147,6 +148,7 @@ public class Shop : MonoBehaviour
                 if (autoclicker.quantity < 5)
                 {
                     autoclicker.quantity = autoclicker.quantity + 1;
+                    zombie.CoinsBalance = zombie.CoinsBalance - autoclicker.price;
                     autoclicker.price = autoclicker.price + 70;
                     autoclicker.damage = autoclicker.damage + 7;
                     AcCost.text = $"Cost: {autoclicker.price}";

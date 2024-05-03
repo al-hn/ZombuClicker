@@ -83,8 +83,13 @@ public class Zombie : MonoBehaviour
             DefaultZombie();
             isAlive = true;
         }
-        else
+        else if(nad.judgment_night.gameObject.active)
         {
+            gameObject.SetActive(true);
+            RollZombieInJudgment_night();
+            isAlive = true;
+        }
+        else{
             gameObject.SetActive(true);
             RollZombie();
             isAlive = true;
@@ -93,7 +98,7 @@ public class Zombie : MonoBehaviour
 
     public void DropCoin()
     {
-        int CountCoins = Random.Range(1, 5);
+        int CountCoins = Random.Range(2, 7);
         CoinsBalance = CoinsBalance + CountCoins;
     }
 
@@ -108,29 +113,21 @@ public class Zombie : MonoBehaviour
         baseHPValue.BaseHealth = baseHPValue.BaseHealth + HealHPBase;
     }
 
-    public void ChangeToBoss()
-    {
-        damage = baseHPValue.BaseHealth;
-        health = 5000;
-        CoinsBalance = CoinsBalance + 300;
-        zombieAttackCooldown = 30.0f;
-    }
 
     public void ZombieWithArmor()
     {
-        damage = 50;
+        damage = 15;
         health = 200;
-        armor = 300;
+        armor = 100;
         zombieAttackCooldown = 3.0f;
-        CoinsBalance = CoinsBalance + 150;
+        CoinsBalance = CoinsBalance + 50;
     }
 
     public void SpeedZombie()
     {
-        damage = 1;
-        zombieAttackCooldown = 0.3f;
-        health = 100;
-        CoinsBalance = CoinsBalance + 100;
+        damage = 10;
+        health = 150;
+        CoinsBalance = CoinsBalance + 30;
     }
 
     public void DefaultZombie()
@@ -158,21 +155,73 @@ public class Zombie : MonoBehaviour
         }
         else if (randVal < weights[0] + weights[1])
         {
-            ZombieWithArmor();
+            SpeedZombie();
             Debug.Log("Zombie w/armor is spawned");
         }
         else if (randVal < weights[0] + weights[1] + weights[2])
         {
-            SpeedZombie();
+            ZombieWithArmor();
+            Debug.Log("Speed zombie is spawned");
+        }
+    }
+          
+    public void RollZombieInJudgment_night()
+    {
+        float[] weights = { 0.4f, 0.3f, 0.2f };
+        float totalWeight = 0f;
+        foreach (float weight in weights)
+        {
+            totalWeight = totalWeight + weight;
+        }
+
+        float randVal = Random.Range(0f, totalWeight);
+        if (randVal < weights[0] + weights[1])
+        {
+            SpeedZombieInJudgment_night();
+            Debug.Log("Zombie w/armor is spawned");
+        }
+        else if (randVal < weights[0] + weights[1] + weights[2])
+        {
+            ZombieWithArmorInJudgment_night();
             Debug.Log("Speed zombie is spawned");
         }
         else
         {
-            ChangeToBoss();
+            ChangeToBossInJudgment_night();
             Debug.Log("Unlucky. Boss is spawned");
         }
-
+    
     }
+        public void ChangeToBossInJudgment_night()
+    {
+        damage = baseHPValue.BaseHealth + 1;
+        health = 10000;
+        CoinsBalance = CoinsBalance + 500;
+    }
+    
+
+    public void ZombieWithArmorInJudgment_night()
+    {
+        damage = 20;
+        health = 500;
+        armor = 1500;
+        zombieAttackCooldown = 3.0f;
+        CoinsBalance = CoinsBalance + 100;
+    }
+
+    public void SpeedZombieInJudgment_night()
+    {
+        damage = 15;
+        health = 600;
+        CoinsBalance = CoinsBalance + 70;
+    }
+
+
+
+    
+
+
+    
     public void DamageEffect()
     {
         ShowDamageIndicator();
