@@ -10,23 +10,23 @@ public class FireAspect : Item
     public void Start()
     {
         weapon = GameObject.Find("Weapon").GetComponent<Weapon>();
-        Apply();
     }
 
     public override void Apply()
     {
-        if (isOwned == true)
-        {
-            Fire();
-        }
+        InvokeRepeating("Fire", 3.0f, 3.0f);
     }
 
     public async void Fire()
     {
-        for (int i = 0; i < 5; i++)
+        if (weapon.hitCount % 5 == 0)
         {
-            weapon.Attack();
-            await Task.Delay((int)(1.0f * 1000));
+            for (int i = 0; i < 6; i++)
+            {
+                weapon.Attack();
+                await Task.Delay((int)(1.0f * 1000));
+            }
+            weapon.hitCount = 1;
         }
     }
 }

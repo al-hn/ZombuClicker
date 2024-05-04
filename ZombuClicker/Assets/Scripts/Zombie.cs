@@ -83,13 +83,14 @@ public class Zombie : MonoBehaviour
             DefaultZombie();
             isAlive = true;
         }
-        else if(nad.judgment_night.gameObject.active)
+        else if (nad.judgment_night.gameObject.active)
         {
             gameObject.SetActive(true);
             RollZombieInJudgment_night();
             isAlive = true;
         }
-        else{
+        else
+        {
             gameObject.SetActive(true);
             RollZombie();
             isAlive = true;
@@ -113,13 +114,11 @@ public class Zombie : MonoBehaviour
         baseHPValue.BaseHealth = baseHPValue.BaseHealth + HealHPBase;
     }
 
-
     public void ZombieWithArmor()
     {
         damage = 15;
         health = 200;
         armor = 100;
-        zombieAttackCooldown = 3.0f;
         CoinsBalance = CoinsBalance + 50;
     }
 
@@ -164,10 +163,10 @@ public class Zombie : MonoBehaviour
             Debug.Log("Speed zombie is spawned");
         }
     }
-          
+
     public void RollZombieInJudgment_night()
     {
-        float[] weights = { 0.4f, 0.3f, 0.2f };
+        float[] weights = { 0.4f, 0.3f, 0.1f };
         float totalWeight = 0f;
         foreach (float weight in weights)
         {
@@ -190,15 +189,15 @@ public class Zombie : MonoBehaviour
             ChangeToBossInJudgment_night();
             Debug.Log("Unlucky. Boss is spawned");
         }
-    
+
     }
-        public void ChangeToBossInJudgment_night()
+
+    public void ChangeToBossInJudgment_night()
     {
         damage = baseHPValue.BaseHealth + 1;
         health = 10000;
         CoinsBalance = CoinsBalance + 500;
     }
-    
 
     public void ZombieWithArmorInJudgment_night()
     {
@@ -216,12 +215,6 @@ public class Zombie : MonoBehaviour
         CoinsBalance = CoinsBalance + 70;
     }
 
-
-
-    
-
-
-    
     public void DamageEffect()
     {
         ShowDamageIndicator();

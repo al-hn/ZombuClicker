@@ -7244,6 +7244,7 @@ MonoBehaviour:
   popUpText: {fileID: 737707023076965940, guid: ae574dc76a065c34792a3e18793f293a, type: 3}
   ParentpopUpText: {fileID: 8704372706655735693, guid: ae574dc76a065c34792a3e18793f293a, type: 3}
   damage: 5
+  hitCount: 0
 --- !u!4 &1014498494
 Transform:
   m_ObjectHideFlags: 0
@@ -9167,7 +9168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseHealth: 100
-  Armor: 40
+  Armor: 30
   BSValue: {fileID: 1401475383}
   ShieldText: {fileID: 1377407496}
 --- !u!1001 &1350251666

@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
     public GameObject ParentpopUpText;
     [SerializeField] public int damage = 5;
     FlashEffect fleff;
+    [SerializeField] public int hitCount = 0;
 
     void Start()
     {
@@ -26,6 +27,9 @@ public class Weapon : MonoBehaviour
 
     public async void Attack()
     {
+        hitCount = hitCount + 1;
+        Debug.Log($"hitCount: {hitCount}");
+
         zombie.health = zombie.health - damage;
         Instantiate(popUPDamagePrefab, transform.position, quaternion.identity);
 
