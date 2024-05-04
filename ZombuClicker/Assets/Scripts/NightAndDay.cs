@@ -9,6 +9,8 @@ using UnityEngine.AI;
 
 public class NightAndDay : MonoBehaviour
 {
+    public GameObject Night_B;
+    public GameObject JN_B;
     [SerializeField] public TextMeshProUGUI Night;
     [SerializeField] public TextMeshProUGUI Day;
     [SerializeField] public TextMeshProUGUI judgment_night;
@@ -17,7 +19,7 @@ public class NightAndDay : MonoBehaviour
 
     public void Start()
     {
-        InvokeRepeating("DayAndNight", 60f, ColdownDays);
+        InvokeRepeating("DayAndNight", ColdownDays, ColdownDays);
     }
 
     private void DayAndNight()
@@ -26,12 +28,16 @@ public class NightAndDay : MonoBehaviour
         {
             Night.gameObject.SetActive(true);
             Day.gameObject.SetActive(false);
+            Night_B.gameObject.SetActive(true);
+            JN_B.gameObject.SetActive(false);
             judgment_night.gameObject.SetActive(false);
         }
         else
         {
             Night.gameObject.SetActive(false);
             Day.gameObject.SetActive(true);
+            Night_B.gameObject.SetActive(false);
+            JN_B.gameObject.SetActive(false);
             judgment_night.gameObject.SetActive(false);
             judgment_nightd();
         }
@@ -43,7 +49,8 @@ public class NightAndDay : MonoBehaviour
         if (ChangeJudgment_night == n)
         {
             judgment_night.gameObject.SetActive(true);
-            Night.gameObject.SetActive(false);
+            Night.gameObject.gameObject.SetActive(false);
+            JN_B.gameObject.gameObject.SetActive(true);
             Day.gameObject.SetActive(false);
         }
         else
