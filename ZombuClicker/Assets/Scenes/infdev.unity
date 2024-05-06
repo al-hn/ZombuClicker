@@ -6569,7 +6569,7 @@ MonoBehaviour:
   Night: {fileID: 579204478}
   Day: {fileID: 1384681347}
   judgment_night: {fileID: 502205259}
-  ColdownDays: 20
+  ColdownDays: 5
   ChangeJudgment_night: 1
 --- !u!1 &927576870
 GameObject:

@@ -21,6 +21,8 @@ public class Zombie : MonoBehaviour
     [SerializeField] public int defaultZombuHealth = 100;
     [SerializeField] public int currentHealth;
     [SerializeField] public int armor = 0;
+    [SerializeField] public int MinCoin = 2;
+    [SerializeField] public int MaxCoin = 7;
     [SerializeField] public float zombieAttackCooldown = 3.0f;
     [SerializeField] public float RespawnCooldown = 1.0f;
     [SerializeField] public int damage = 1;
@@ -133,6 +135,7 @@ public class Zombie : MonoBehaviour
     {
         damage = 15;
         CoinsBalance = CoinsBalance + 50;
+        CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = zwaHealth;
     }
 
@@ -140,7 +143,7 @@ public class Zombie : MonoBehaviour
     {
         damage = 10;
         CoinsBalance = CoinsBalance + 30;
-        CountCoins = Random.Range(2, 7);
+        CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = sZombie;
     }
 
@@ -148,7 +151,7 @@ public class Zombie : MonoBehaviour
     {
         zombieAttackCooldown = 3.0f;
         damage = Random.Range(1, 5);
-        CountCoins = Random.Range(2, 7);
+        CountCoins = Random.Range(MinCoin, MaxCoin);
     }
 
     public void RollZombie()
@@ -216,6 +219,7 @@ public class Zombie : MonoBehaviour
     {
         damage = baseHPValue.BaseHealth + 1;
         CoinsBalance = CoinsBalance + 500;
+        CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = jnbHealth;
     }
 
@@ -225,6 +229,7 @@ public class Zombie : MonoBehaviour
         armor = 1500;
         zombieAttackCooldown = 3.0f;
         CoinsBalance = CoinsBalance + 100;
+        CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = jnzwaHealth;
     }
 
@@ -232,6 +237,7 @@ public class Zombie : MonoBehaviour
     {
         damage = 15;
         CoinsBalance = CoinsBalance + 70;
+        CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = jnszHealth;
     }
 
@@ -254,17 +260,17 @@ public class Zombie : MonoBehaviour
 
     public void UpgradeZombie()
     {
-        defaultZombuHealth = defaultZombuHealth + 5;
-        zwaHealth = zwaHealth + 15;
-        sZombie = sZombie + 10;
-        jnbHealth = jnbHealth + 600;
+        defaultZombuHealth = defaultZombuHealth + 10;
+        zwaHealth = zwaHealth + 20;
+        sZombie = sZombie + 15;
+        jnbHealth = jnbHealth + 200;
         jnzwaHealth = jnzwaHealth + 70;
         jnszHealth = jnszHealth + 50;
     }
     
     public void UpgradeDrop()
     {
-        CoinsBalance =+ 100;
-        CoinsBalance =+ 100;
+        MaxCoin = MaxCoin + 3;
+        MinCoin = MinCoin + 2;
     }
 }
