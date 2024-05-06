@@ -28,15 +28,13 @@ public class Weapon : MonoBehaviour
     public async void Attack()
     {
         hitCount = hitCount + 1;
-        Debug.Log($"hitCount: {hitCount}");
 
-        zombie.health = zombie.health - damage;
+        zombie.currentHealth = zombie.currentHealth - damage;
         Instantiate(popUPDamagePrefab, transform.position, quaternion.identity);
 
-        Debug.Log("ZOMBU HEALTH: " + zombie.health);
         fleff.Flash();
 
-        if (zombie.health <= 0)
+        if (zombie.currentHealth <= 0)
         {
             zombie.Die();
             await Task.Delay((int)(zombie.RespawnCooldown * 1000));

@@ -14,7 +14,7 @@ public class NightAndDay : MonoBehaviour
     [SerializeField] public TextMeshProUGUI Night;
     [SerializeField] public TextMeshProUGUI Day;
     [SerializeField] public TextMeshProUGUI judgment_night;
-    [SerializeField] private float ColdownDays = 60f;
+    [SerializeField] public float ColdownDays = 30f;
     [SerializeField] private float ChangeJudgment_night = 1;
 
     public void Start()

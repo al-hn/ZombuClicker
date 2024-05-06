@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using RandomUnity = UnityEngine.Random;
 using RandomSystem = System.Random;
 using TMPro;
+using UnityEngine.UIElements;
+using JetBrains.Annotations;
 
 public class Zombie : MonoBehaviour
 {
@@ -16,16 +18,23 @@ public class Zombie : MonoBehaviour
     public float damageDuration = 0.2f;
     public TextMeshProUGUI CoinsObject;
     public GameObject DamageOverlay;
-    [SerializeField] public int health = 100;
+    [SerializeField] public int defaultZombuHealth = 100;
+    [SerializeField] public int currentHealth;
     [SerializeField] public int armor = 0;
     [SerializeField] public float zombieAttackCooldown = 3.0f;
     [SerializeField] public float RespawnCooldown = 1.0f;
     [SerializeField] public int damage = 1;
     [SerializeField] public int CoinsBalance = 0;
     [SerializeField] public int HPRegenBase = 3;
+    [SerializeField] public int zwaHealth = 200;
+    [SerializeField] public int sZombie = 150;
+    [SerializeField] public int jnbHealth = 10000;
+    [SerializeField] public int jnzwaHealth = 500;
+    [SerializeField] public int jnszHealth = 600;
     public FlashEffect fleff;
     public NightAndDay nad;
     public GameObject deathscreen;
+    public int CountCoins;
 
     void Start()
     {
@@ -33,7 +42,9 @@ public class Zombie : MonoBehaviour
         baseHPValue = GameObject.Find("Base HP Text").GetComponent<BaseHPValue>();
         nad = GameObject.Find("Time").GetComponent<NightAndDay>();
         fleff = GetComponent<FlashEffect>();
-        AttackBase();
+        currentHealth = defaultZombuHealth;
+        InvokeRepeating("UpgradeZombie", nad.ColdownDays, nad.ColdownDays);
+        InvokeRepeating("UpgradeDrop", nad.ColdownDays*2, nad.ColdownDays*2);
     }
 
     public void AttackBase()
@@ -62,14 +73,13 @@ public class Zombie : MonoBehaviour
         {
             Debug.Log("Zombie is dead");
         }
-
     }
 
     public void Die()
     {
         isAlive = false;
         gameObject.SetActive(false);
-        Debug.Log("Zombie Is Killed");
+        // Debug.Log("Zombie Is Killed");
         DropCoin();
         HpHealAfterKillZombie();
     }
@@ -81,6 +91,7 @@ public class Zombie : MonoBehaviour
             gameObject.SetActive(true);
             fleff.img.material = fleff.originalMat;
             DefaultZombie();
+            currentHealth = defaultZombuHealth;
             isAlive = true;
         }
         else if (nad.judgment_night.gameObject.active)
@@ -95,11 +106,15 @@ public class Zombie : MonoBehaviour
             RollZombie();
             isAlive = true;
         }
+        // gameObject.SetActive(true);
+        // fleff.img.material = fleff.originalMat;
+        // // DefaultZombie();
+        // currentHealth = defaultZombuHealth;
+        // isAlive = true;
     }
 
     public void DropCoin()
     {
-        int CountCoins = Random.Range(2, 7);
         CoinsBalance = CoinsBalance + CountCoins;
     }
 
@@ -117,24 +132,23 @@ public class Zombie : MonoBehaviour
     public void ZombieWithArmor()
     {
         damage = 15;
-        health = 200;
-        armor = 100;
         CoinsBalance = CoinsBalance + 50;
+        // currentHealth = zwaHealth;
     }
 
     public void SpeedZombie()
     {
         damage = 10;
-        health = 150;
         CoinsBalance = CoinsBalance + 30;
+        CountCoins = Random.Range(2, 7);
+        // currentHealth = sZombie;
     }
 
     public void DefaultZombie()
     {
-        health = 100;
-        armor = Random.Range(0, 60);
         zombieAttackCooldown = 3.0f;
         damage = Random.Range(1, 5);
+        CountCoins = Random.Range(2, 7);
     }
 
     public void RollZombie()
@@ -150,17 +164,20 @@ public class Zombie : MonoBehaviour
         if (randVal < weights[0])
         {
             DefaultZombie();
-            Debug.Log("Default.");
+            currentHealth = defaultZombuHealth;
+            Debug.Log("DEFAULT");
         }
         else if (randVal < weights[0] + weights[1])
         {
             SpeedZombie();
-            Debug.Log("Zombie w/armor is spawned");
+            currentHealth = sZombie;
+            Debug.Log("speed ZOMBIE night");
         }
         else if (randVal < weights[0] + weights[1] + weights[2])
         {
             ZombieWithArmor();
-            Debug.Log("Speed zombie is spawned");
+            currentHealth = zwaHealth;
+            Debug.Log("Armor ZOMBIE night");
         }
     }
 
@@ -177,17 +194,20 @@ public class Zombie : MonoBehaviour
         if (randVal < weights[0] + weights[1])
         {
             SpeedZombieInJudgment_night();
-            Debug.Log("Zombie w/armor is spawned");
+            currentHealth = jnszHealth;
+            Debug.Log("ARMOR ZOMBIE jn");
         }
         else if (randVal < weights[0] + weights[1] + weights[2])
         {
             ZombieWithArmorInJudgment_night();
-            Debug.Log("Speed zombie is spawned");
+            currentHealth = jnzwaHealth;
+            Debug.Log("SPEED ZOMBIE jn");
         }
         else
         {
             ChangeToBossInJudgment_night();
-            Debug.Log("Unlucky. Boss is spawned");
+            currentHealth = jnbHealth;
+            Debug.Log("BOSS jn");
         }
 
     }
@@ -195,24 +215,24 @@ public class Zombie : MonoBehaviour
     public void ChangeToBossInJudgment_night()
     {
         damage = baseHPValue.BaseHealth + 1;
-        health = 10000;
         CoinsBalance = CoinsBalance + 500;
+        // currentHealth = jnbHealth;
     }
 
     public void ZombieWithArmorInJudgment_night()
     {
         damage = 20;
-        health = 500;
         armor = 1500;
         zombieAttackCooldown = 3.0f;
         CoinsBalance = CoinsBalance + 100;
+        // currentHealth = jnzwaHealth;
     }
 
     public void SpeedZombieInJudgment_night()
     {
         damage = 15;
-        health = 600;
         CoinsBalance = CoinsBalance + 70;
+        // currentHealth = jnszHealth;
     }
 
     public void DamageEffect()
@@ -230,5 +250,21 @@ public class Zombie : MonoBehaviour
     public void HideDamageIndicator()
     {
         DamageOverlay.SetActive(false);
+    }
+
+    public void UpgradeZombie()
+    {
+        defaultZombuHealth = defaultZombuHealth + 5;
+        zwaHealth = zwaHealth + 15;
+        sZombie = sZombie + 10;
+        jnbHealth = jnbHealth + 600;
+        jnzwaHealth = jnzwaHealth + 70;
+        jnszHealth = jnszHealth + 50;
+    }
+    
+    public void UpgradeDrop()
+    {
+        CoinsBalance =+ 100;
+        CoinsBalance =+ 100;
     }
 }

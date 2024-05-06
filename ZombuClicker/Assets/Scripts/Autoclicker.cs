@@ -23,7 +23,7 @@ public class Autoclicker : Item
 
     public void autoclick()
     {
-        if (zombie.health > 0) zombie.health = zombie.health - damage;
+        if (zombie.currentHealth > 0) zombie.currentHealth = zombie.currentHealth - damage;
         else
         {
             zombie.Die();

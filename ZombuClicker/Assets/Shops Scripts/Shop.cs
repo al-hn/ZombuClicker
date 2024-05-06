@@ -50,7 +50,7 @@ public class Shop : MonoBehaviour
     {
         if (zombie.CoinsBalance >= dmgAdder.price)
         {
-            if (dmgAdder.quantity < 5)
+            if (dmgAdder.quantity < 100000)
             {
                 dmgAdder.quantity = dmgAdder.quantity + 1;
                 zombie.CoinsBalance = zombie.CoinsBalance - dmgAdder.price;
@@ -145,7 +145,7 @@ public class Shop : MonoBehaviour
         {
             if (zombie.CoinsBalance >= autoclicker.price)
             {
-                if (autoclicker.quantity < 5)
+                if (autoclicker.quantity < 100000)
                 {
                     autoclicker.quantity = autoclicker.quantity + 1;
                     zombie.CoinsBalance = zombie.CoinsBalance - autoclicker.price;
