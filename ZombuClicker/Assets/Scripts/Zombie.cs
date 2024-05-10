@@ -10,14 +10,21 @@ using RandomSystem = System.Random;
 using TMPro;
 using UnityEngine.UIElements;
 using JetBrains.Annotations;
+using System.IO;
+using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
+    public UnityEngine.UI.Image imageComponent;
     public bool isAlive = true;
     public BaseHPValue baseHPValue;
     public float damageDuration = 0.2f;
     public TextMeshProUGUI CoinsObject;
     public GameObject DamageOverlay;
+    [SerializeField] public Sprite DefaultZombieSprite;
+    [SerializeField] public Sprite lvl2ZombieSprite;
+    [SerializeField] public Sprite ArmorZombieSprite;
+    [SerializeField] public Sprite BossZombieSprite;
     [SerializeField] public int defaultZombuHealth = 100;
     [SerializeField] public int currentHealth;
     [SerializeField] public int armor = 0;
@@ -40,6 +47,7 @@ public class Zombie : MonoBehaviour
 
     void Start()
     {
+        imageComponent = GetComponent<UnityEngine.UI.Image>();
         InvokeRepeating("AttackBase", zombieAttackCooldown, zombieAttackCooldown);
         baseHPValue = GameObject.Find("Base HP Text").GetComponent<BaseHPValue>();
         nad = GameObject.Find("Time").GetComponent<NightAndDay>();
@@ -133,6 +141,7 @@ public class Zombie : MonoBehaviour
 
     public void ZombieWithArmor()
     {
+        imageComponent.sprite = ArmorZombieSprite;
         damage = 15;
         CoinsBalance = CoinsBalance + 50;
         CountCoins = Random.Range(MinCoin, MaxCoin);
@@ -141,6 +150,7 @@ public class Zombie : MonoBehaviour
 
     public void SpeedZombie()
     {
+        imageComponent.sprite = lvl2ZombieSprite;
         damage = 10;
         CoinsBalance = CoinsBalance + 30;
         CountCoins = Random.Range(MinCoin, MaxCoin);
@@ -149,10 +159,12 @@ public class Zombie : MonoBehaviour
 
     public void DefaultZombie()
     {
+        imageComponent.sprite = DefaultZombieSprite;
         zombieAttackCooldown = 3.0f;
         damage = Random.Range(1, 5);
         CountCoins = Random.Range(MinCoin, MaxCoin);
     }
+
 
     public void RollZombie()
     {
@@ -217,6 +229,7 @@ public class Zombie : MonoBehaviour
 
     public void ChangeToBossInJudgment_night()
     {
+        imageComponent.sprite = BossZombieSprite;
         damage = baseHPValue.BaseHealth + 1;
         CoinsBalance = CoinsBalance + 500;
         CountCoins = Random.Range(MinCoin, MaxCoin);
@@ -225,6 +238,7 @@ public class Zombie : MonoBehaviour
 
     public void ZombieWithArmorInJudgment_night()
     {
+        imageComponent.sprite = ArmorZombieSprite;
         damage = 20;
         armor = 1500;
         zombieAttackCooldown = 3.0f;
@@ -235,6 +249,7 @@ public class Zombie : MonoBehaviour
 
     public void SpeedZombieInJudgment_night()
     {
+        imageComponent.sprite = lvl2ZombieSprite;
         damage = 15;
         CoinsBalance = CoinsBalance + 70;
         CountCoins = Random.Range(MinCoin, MaxCoin);
