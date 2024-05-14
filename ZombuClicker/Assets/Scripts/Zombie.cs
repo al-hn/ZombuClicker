@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
+// using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -44,6 +44,8 @@ public class Zombie : MonoBehaviour
     public NightAndDay nad;
     public GameObject deathscreen;
     public int CountCoins;
+    public SoundEffectsPlayer sfxPlayer;
+    public CloudSaving cloudSaving;
 
     void Start()
     {
@@ -55,6 +57,8 @@ public class Zombie : MonoBehaviour
         currentHealth = defaultZombuHealth;
         InvokeRepeating("UpgradeZombie", nad.ColdownDays, nad.ColdownDays);
         InvokeRepeating("UpgradeDrop", nad.ColdownDays*2, nad.ColdownDays*2);
+        sfxPlayer = GameObject.Find("Canvas").GetComponent<SoundEffectsPlayer>();
+        cloudSaving = GameObject.Find("CloudSavings").GetComponent<CloudSaving>();
     }
 
     public void AttackBase()
@@ -76,6 +80,7 @@ public class Zombie : MonoBehaviour
                 else if (baseHPValue.Armor == 0 && baseHPValue.BaseHealth == 0)
                 {
                     deathscreen.gameObject.SetActive(true);
+                    sfxPlayer.errorSound();
                 }
             }
         }
@@ -126,6 +131,7 @@ public class Zombie : MonoBehaviour
     public void DropCoin()
     {
         CoinsBalance = CoinsBalance + CountCoins;
+        cloudSaving.MySave();
     }
 
     void Update()
@@ -141,25 +147,27 @@ public class Zombie : MonoBehaviour
 
     public void ZombieWithArmor()
     {
-        imageComponent.sprite = ArmorZombieSprite;
+        // imageComponent.sprite = ArmorZombieSprite;
         damage = 15;
         CoinsBalance = CoinsBalance + 50;
         CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = zwaHealth;
+        cloudSaving.MySave();
     }
 
     public void SpeedZombie()
     {
-        imageComponent.sprite = lvl2ZombieSprite;
+        // imageComponent.sprite = lvl2ZombieSprite;
         damage = 10;
         CoinsBalance = CoinsBalance + 30;
         CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = sZombie;
+        cloudSaving.MySave();
     }
 
     public void DefaultZombie()
     {
-        imageComponent.sprite = DefaultZombieSprite;
+        // imageComponent.sprite = DefaultZombieSprite;
         zombieAttackCooldown = 3.0f;
         damage = Random.Range(1, 5);
         CountCoins = Random.Range(MinCoin, MaxCoin);
@@ -229,31 +237,35 @@ public class Zombie : MonoBehaviour
 
     public void ChangeToBossInJudgment_night()
     {
-        imageComponent.sprite = BossZombieSprite;
+        sfxPlayer.jumpscare();
+        // imageComponent.sprite = BossZombieSprite;
         damage = baseHPValue.BaseHealth + 1;
         CoinsBalance = CoinsBalance + 500;
         CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = jnbHealth;
+        cloudSaving.MySave();
     }
 
     public void ZombieWithArmorInJudgment_night()
     {
-        imageComponent.sprite = ArmorZombieSprite;
+        // imageComponent.sprite = ArmorZombieSprite;
         damage = 20;
         armor = 1500;
         zombieAttackCooldown = 3.0f;
         CoinsBalance = CoinsBalance + 100;
         CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = jnzwaHealth;
+        cloudSaving.MySave();
     }
 
     public void SpeedZombieInJudgment_night()
     {
-        imageComponent.sprite = lvl2ZombieSprite;
+        // imageComponent.sprite = lvl2ZombieSprite;
         damage = 15;
         CoinsBalance = CoinsBalance + 70;
         CountCoins = Random.Range(MinCoin, MaxCoin);
         // currentHealth = jnszHealth;
+        cloudSaving.MySave();
     }
 
     public void DamageEffect()
@@ -281,11 +293,13 @@ public class Zombie : MonoBehaviour
         jnbHealth = jnbHealth + 200;
         jnzwaHealth = jnzwaHealth + 70;
         jnszHealth = jnszHealth + 50;
+        cloudSaving.MySave();
     }
     
     public void UpgradeDrop()
     {
         MaxCoin = MaxCoin + 3;
         MinCoin = MinCoin + 2;
+        cloudSaving.MySave();
     }
 }

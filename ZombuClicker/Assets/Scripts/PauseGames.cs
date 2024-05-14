@@ -1,17 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class PauseGames : MonoBehaviour
 {
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject Zombu;
     [SerializeField] GameObject ZombuText;
+    public CloudSaving cloudSaving;
+
+    private const int GetMoneyAdId = 1;
 
     void Start()
     {
+        cloudSaving = GameObject.Find("CloudSavings").GetComponent<CloudSaving>();
+        YandexGame.FullscreenShow();
     }
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+    
     private void Update()
     {
         HandlePause();
@@ -45,10 +63,17 @@ public class PauseGames : MonoBehaviour
     }
     public void BackToMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        cloudSaving.DefaultVariables();
+        // Company of Heroes 3
+        cloudSaving.MySave();
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("MainMenu");
     }
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // await Task.Delay((int)(1.0f * 1000));
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("infdev");
     }
+
 }

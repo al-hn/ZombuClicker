@@ -17,12 +17,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] public int damage = 5;
     FlashEffect fleff;
     [SerializeField] public int hitCount = 0;
+    public SoundEffectsPlayer sfxPlayer;
 
     void Start()
     {
         zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
         fleff = GameObject.Find("Zombu").GetComponent<FlashEffect>();
         popUpText.text = damage.ToString();
+        sfxPlayer = GameObject.Find("Canvas").GetComponent<SoundEffectsPlayer>();
     }
 
     public async void Attack()
@@ -37,7 +39,8 @@ public class Weapon : MonoBehaviour
         if (zombie.currentHealth <= 0)
         {
             zombie.Die();
-            await Task.Delay((int)(zombie.RespawnCooldown * 1000));
+            sfxPlayer.dingSound();
+            await Task.Delay((int)(1.0f * 1000));
             zombie.Spawn();
         }
     }

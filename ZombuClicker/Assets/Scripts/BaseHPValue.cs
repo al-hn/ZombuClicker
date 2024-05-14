@@ -13,7 +13,7 @@ public class BaseHPValue : MonoBehaviour
     void Start()
     {
         BSValue = GameObject.Find("Value base HP").GetComponent<TextMeshProUGUI>();
-        ShieldText = GameObject.Find("armortext").GetComponent<TextMeshProUGUI>();
+        ShieldText = GameObject.Find("armortext (1)").GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
@@ -21,7 +21,7 @@ public class BaseHPValue : MonoBehaviour
         Armor = Mathf.Clamp(Armor, 0, 100);
         BaseHealth = Mathf.Clamp(BaseHealth, 0, 100);
 
-        ShieldText.text = $"Shield {Armor}";
+        ShieldText.text = $"{Armor}";
         BSValue.text = $"{BaseHealth}";
     }
 

@@ -1,0 +1,28 @@
+{
+    "idSave": 179,
+    "isFirstSession": false,
+    "language": "en",
+    "promptDone": false,
+    "money": 179,
+    "baseShieldIsOwned": true,
+    "healIsOwned": true,
+    "fireAspectIsOwned": false,
+    "autoclickerIsOwned": false,
+    "damageDoublerIsOwned": false,
+    "damageAdderIsOwned": false,
+    "vampirismIsOwned": false,
+    "defaultZombuHealth": 100,
+    "MinCoin": 2,
+    "MaxCoin": 7,
+    "zwaHealth": 260,
+    "sZombie": 195,
+    "jnbHealth": 10600,
+    "jnzwaHealth": 710,
+    "jnszHealth": 750,
+    "newPlayerName": "Hello!",
+    "openLevels": [
+        false,
+        true,
+        false
+    ]
+}
