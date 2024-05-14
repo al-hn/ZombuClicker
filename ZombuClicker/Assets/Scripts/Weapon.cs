@@ -41,7 +41,10 @@ public class Weapon : MonoBehaviour
             zombie.Die();
             sfxPlayer.dingSound();
             await Task.Delay((int)(1.0f * 1000));
-            zombie.Spawn();
+            zombie.gameObject.SetActive(true);
+            zombie.DefaultZombie();
+            zombie.currentHealth = zombie.defaultZombuHealth;
+            zombie.isAlive = true;
         }
     }
 

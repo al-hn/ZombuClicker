@@ -21,10 +21,16 @@ public class Zombie : MonoBehaviour
     public float damageDuration = 0.2f;
     public TextMeshProUGUI CoinsObject;
     public GameObject DamageOverlay;
+    // Zombie sprites
     [SerializeField] public Sprite DefaultZombieSprite;
     [SerializeField] public Sprite lvl2ZombieSprite;
     [SerializeField] public Sprite ArmorZombieSprite;
     [SerializeField] public Sprite BossZombieSprite;
+    // Zombie GameeObject
+    public GameObject speedZombie;
+    public GameObject armorZombie;
+    public GameObject bossZombie;
+    
     [SerializeField] public int defaultZombuHealth = 100;
     [SerializeField] public int currentHealth;
     [SerializeField] public int armor = 0;
@@ -59,6 +65,18 @@ public class Zombie : MonoBehaviour
         InvokeRepeating("UpgradeDrop", nad.ColdownDays*2, nad.ColdownDays*2);
         sfxPlayer = GameObject.Find("Canvas").GetComponent<SoundEffectsPlayer>();
         cloudSaving = GameObject.Find("CloudSavings").GetComponent<CloudSaving>();
+
+        // speedZombie = GameObject.Find("ранер зомби");
+        // armorZombie = GameObject.Find("зомби брониносец");
+        // bossZombie = GameObject.Find("зомби босс");
+
+        speedZombie.transform.localPosition = gameObject.transform.localPosition;
+        armorZombie.transform.localPosition = gameObject.transform.localPosition;
+        bossZombie.transform.localPosition = gameObject.transform.localPosition;
+
+        speedZombie.transform.localScale = gameObject.transform.localScale;
+        armorZombie.transform.localScale = gameObject.transform.localScale;   
+        bossZombie.transform.localScale = gameObject.transform.localScale;
     }
 
     public void AttackBase()
@@ -92,40 +110,40 @@ public class Zombie : MonoBehaviour
 
     public void Die()
     {
+        DropCoin();
+        HpHealAfterKillZombie();
         isAlive = false;
         gameObject.SetActive(false);
         // Debug.Log("Zombie Is Killed");
-        DropCoin();
-        HpHealAfterKillZombie();
     }
 
     public void Spawn()
     {
-        if (nad.Day.gameObject.active)
-        {
-            gameObject.SetActive(true);
-            fleff.img.material = fleff.originalMat;
-            DefaultZombie();
-            currentHealth = defaultZombuHealth;
-            isAlive = true;
-        }
-        else if (nad.judgment_night.gameObject.active)
-        {
-            gameObject.SetActive(true);
-            RollZombieInJudgment_night();
-            isAlive = true;
-        }
-        else
-        {
-            gameObject.SetActive(true);
-            RollZombie();
-            isAlive = true;
-        }
-        // gameObject.SetActive(true);
-        // fleff.img.material = fleff.originalMat;
-        // // DefaultZombie();
-        // currentHealth = defaultZombuHealth;
-        // isAlive = true;
+        // if (nad.Day.gameObject.active)
+        // {
+        //     gameObject.SetActive(true);
+        //     fleff.img.material = fleff.originalMat;
+        //     DefaultZombie();
+        //     currentHealth = defaultZombuHealth;
+        //     isAlive = true;
+        // }
+        // else if (nad.judgment_night.gameObject.active)
+        // {
+        //     gameObject.SetActive(true);
+        //     RollZombieInJudgment_night();
+        //     isAlive = true;
+        // }
+        // else
+        // {
+        //     gameObject.SetActive(true);
+        //     RollZombie();
+        //     isAlive = true;
+        // }
+        gameObject.SetActive(true);
+        fleff.img.material = fleff.originalMat;
+        DefaultZombie();
+        currentHealth = defaultZombuHealth;
+        isAlive = true;
     }
 
     public void DropCoin()
@@ -148,6 +166,10 @@ public class Zombie : MonoBehaviour
     public void ZombieWithArmor()
     {
         // imageComponent.sprite = ArmorZombieSprite;
+        armorZombie.SetActive(true);
+        gameObject.SetActive(false);
+        speedZombie.SetActive(false);
+        bossZombie.SetActive(false);
         damage = 15;
         CoinsBalance = CoinsBalance + 50;
         CountCoins = Random.Range(MinCoin, MaxCoin);
@@ -157,6 +179,11 @@ public class Zombie : MonoBehaviour
 
     public void SpeedZombie()
     {
+        armorZombie.SetActive(false);
+        gameObject.SetActive(false);
+        speedZombie.SetActive(true);
+        bossZombie.SetActive(false);
+
         // imageComponent.sprite = lvl2ZombieSprite;
         damage = 10;
         CoinsBalance = CoinsBalance + 30;
@@ -167,6 +194,11 @@ public class Zombie : MonoBehaviour
 
     public void DefaultZombie()
     {
+        armorZombie.SetActive(false);
+        gameObject.SetActive(true);
+        speedZombie.SetActive(false);
+        bossZombie.SetActive(false);
+
         // imageComponent.sprite = DefaultZombieSprite;
         zombieAttackCooldown = 3.0f;
         damage = Random.Range(1, 5);
@@ -237,6 +269,11 @@ public class Zombie : MonoBehaviour
 
     public void ChangeToBossInJudgment_night()
     {
+        armorZombie.SetActive(false);
+        gameObject.SetActive(false);
+        speedZombie.SetActive(false);
+        bossZombie.SetActive(true);
+
         sfxPlayer.jumpscare();
         // imageComponent.sprite = BossZombieSprite;
         damage = baseHPValue.BaseHealth + 1;
@@ -248,6 +285,11 @@ public class Zombie : MonoBehaviour
 
     public void ZombieWithArmorInJudgment_night()
     {
+        armorZombie.SetActive(true);
+        gameObject.SetActive(false);
+        speedZombie.SetActive(false);
+        bossZombie.SetActive(false);
+
         // imageComponent.sprite = ArmorZombieSprite;
         damage = 20;
         armor = 1500;
@@ -260,6 +302,11 @@ public class Zombie : MonoBehaviour
 
     public void SpeedZombieInJudgment_night()
     {
+        armorZombie.SetActive(false);
+        gameObject.SetActive(false);
+        speedZombie.SetActive(true);
+        bossZombie.SetActive(false);
+
         // imageComponent.sprite = lvl2ZombieSprite;
         damage = 15;
         CoinsBalance = CoinsBalance + 70;
