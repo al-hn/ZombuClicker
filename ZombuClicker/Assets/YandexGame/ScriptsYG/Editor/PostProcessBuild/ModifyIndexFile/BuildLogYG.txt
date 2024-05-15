@@ -1,2 +1,2 @@
 Build path: C:/Users/Alihan/Documents/GitHub/ZombuClicker/ZombuClicker/Builds
-Build number: 9
+Build number: 10

@@ -27,20 +27,20 @@ public class Weapon : MonoBehaviour
         sfxPlayer = GameObject.Find("Canvas").GetComponent<SoundEffectsPlayer>();
     }
 
-    public async void Attack()
+    public void Attack()
     {
         hitCount = hitCount + 1;
-
         zombie.currentHealth = zombie.currentHealth - damage;
-        Instantiate(popUPDamagePrefab, transform.position, quaternion.identity);
+        // Instantiate(popUPDamagePrefab, transform.position, quaternion.identity);
 
-        fleff.Flash();
+        // fleff.Flash();
 
         if (zombie.currentHealth <= 0)
         {
             zombie.Die();
-            sfxPlayer.dingSound();
-            await Task.Delay((int)(1.0f * 1000));
+            // sfxPlayer.dingSound();
+            // await Task.Delay((int)(1.0f * 1000));
+
             zombie.gameObject.SetActive(true);
             zombie.DefaultZombie();
             zombie.currentHealth = zombie.defaultZombuHealth;
