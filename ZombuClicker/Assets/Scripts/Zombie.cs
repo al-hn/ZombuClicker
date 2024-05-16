@@ -165,41 +165,38 @@ public class Zombie : MonoBehaviour
 
     public void ZombieWithArmor()
     {
-        // imageComponent.sprite = ArmorZombieSprite;
-        armorZombie.SetActive(true);
-        gameObject.SetActive(false);
-        speedZombie.SetActive(false);
-        bossZombie.SetActive(false);
+        imageComponent.sprite = ArmorZombieSprite;
+        // armorZombie.SetActive(true);
+        // gameObject.SetActive(false);
+        // speedZombie.SetActive(false);
+        // bossZombie.SetActive(false);
         damage = 15;
         CoinsBalance = CoinsBalance + 50;
         CountCoins = Random.Range(MinCoin, MaxCoin);
-        // currentHealth = zwaHealth;
+       
         cloudSaving.MySave();
     }
 
     public void SpeedZombie()
     {
-        armorZombie.SetActive(false);
-        gameObject.SetActive(false);
-        speedZombie.SetActive(true);
-        bossZombie.SetActive(false);
+        // armorZombie.SetActive(false);
+        // gameObject.SetActive(false);
+        // speedZombie.SetActive(true);
+        // bossZombie.SetActive(false);
 
-        // imageComponent.sprite = lvl2ZombieSprite;
+        imageComponent.sprite = lvl2ZombieSprite;
         damage = 10;
         CoinsBalance = CoinsBalance + 30;
         CountCoins = Random.Range(MinCoin, MaxCoin);
-        // currentHealth = sZombie;
+        
         cloudSaving.MySave();
     }
 
     public void DefaultZombie()
     {
-        armorZombie.SetActive(false);
-        gameObject.SetActive(true);
-        speedZombie.SetActive(false);
-        bossZombie.SetActive(false);
+       
 
-        // imageComponent.sprite = DefaultZombieSprite;
+        imageComponent.sprite = DefaultZombieSprite;
         zombieAttackCooldown = 3.0f;
         damage = Random.Range(1, 5);
         CountCoins = Random.Range(MinCoin, MaxCoin);
@@ -269,49 +266,39 @@ public class Zombie : MonoBehaviour
 
     public void ChangeToBossInJudgment_night()
     {
-        armorZombie.SetActive(false);
-        gameObject.SetActive(false);
-        speedZombie.SetActive(false);
-        bossZombie.SetActive(true);
+       
 
         sfxPlayer.jumpscare();
-        // imageComponent.sprite = BossZombieSprite;
+        imageComponent.sprite = BossZombieSprite;
         damage = baseHPValue.BaseHealth + 1;
         CoinsBalance = CoinsBalance + 500;
         CountCoins = Random.Range(MinCoin, MaxCoin);
-        // currentHealth = jnbHealth;
+        
         cloudSaving.MySave();
     }
 
     public void ZombieWithArmorInJudgment_night()
     {
-        armorZombie.SetActive(true);
-        gameObject.SetActive(false);
-        speedZombie.SetActive(false);
-        bossZombie.SetActive(false);
-
-        // imageComponent.sprite = ArmorZombieSprite;
+        
+        imageComponent.sprite = ArmorZombieSprite;
         damage = 20;
         armor = 1500;
         zombieAttackCooldown = 3.0f;
         CoinsBalance = CoinsBalance + 100;
         CountCoins = Random.Range(MinCoin, MaxCoin);
-        // currentHealth = jnzwaHealth;
+        
         cloudSaving.MySave();
     }
 
     public void SpeedZombieInJudgment_night()
     {
-        armorZombie.SetActive(false);
-        gameObject.SetActive(false);
-        speedZombie.SetActive(true);
-        bossZombie.SetActive(false);
+  
 
-        // imageComponent.sprite = lvl2ZombieSprite;
+        imageComponent.sprite = lvl2ZombieSprite;
         damage = 15;
         CoinsBalance = CoinsBalance + 70;
         CountCoins = Random.Range(MinCoin, MaxCoin);
-        // currentHealth = jnszHealth;
+        
         cloudSaving.MySave();
     }
 

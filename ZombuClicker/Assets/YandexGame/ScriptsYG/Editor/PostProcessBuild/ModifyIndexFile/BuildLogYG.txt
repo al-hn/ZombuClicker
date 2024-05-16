@@ -1,2 +1,2 @@
-Build path: C:/Users/Alihan/Documents/GitHub/ZombuClicker/ZombuClicker/Builds
-Build number: 10
+Build path: C:/Users/nural/OneDrive/Рабочий стол/Build 2
+Build number: 13

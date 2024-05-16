@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
 {
     Zombie zombie;
     public GameObject popUPDamagePrefab;
+    public SpawnerZombu spawnerZombu;
 
     public TMP_Text popUpText;
     public GameObject ParentpopUpText;
@@ -21,6 +22,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+        spawnerZombu = GameObject.Find("SpawnerZombu").GetComponent<SpawnerZombu>();
         zombie = GameObject.Find("Zombu").GetComponent<Zombie>();
         fleff = GameObject.Find("Zombu").GetComponent<FlashEffect>();
         popUpText.text = damage.ToString();
@@ -37,15 +39,8 @@ public class Weapon : MonoBehaviour
 
         if (zombie.currentHealth <= 0)
         {
-            zombie.Die();
-            // sfxPlayer.dingSound();
-            // await Task.Delay((int)(1.0f * 1000));
-
-            zombie.gameObject.SetActive(true);
-            zombie.DefaultZombie();
-            zombie.currentHealth = zombie.defaultZombuHealth;
-            zombie.isAlive = true;
+            spawnerZombu.Die();
+            spawnerZombu.SpawnZom();
         }
     }
-
 }
